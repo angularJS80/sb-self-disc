@@ -27,18 +27,20 @@ public class Event {
     private int limitOfEnrollment;
     private boolean offline;
     private boolean free;
-    /*
+
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
-
-    @ManyToOne
-    @JsonSerialize(using = AccountSerializer.class)
-    private Account owner;
-
     public void update() {
         if (basePrice == 0 && maxPrice == 0) {
             this.free = true;
         }
     }
+    
+    /*
+    @ManyToOne
+    @JsonSerialize(using = AccountSerializer.class)
+    private Account owner;
     */
+
+
 }

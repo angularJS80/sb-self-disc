@@ -8,7 +8,7 @@ public class EventTest {
 
     @Test
     public void javaBean() {
-        String name = "keesun";
+        String name = "java bean constructor test";
         Event event = new Event();
         event.setName(name);
         //assertThat(event.getName()).isEqualTo(name);
@@ -19,7 +19,7 @@ public class EventTest {
         String name = "test event";
         Event event = Event.builder()
                 .name(name)
-                .description("ksug")
+                .description("builder event test")
                 .build();
 
         //assertThat(event.getName()).isEqualTo(name);
