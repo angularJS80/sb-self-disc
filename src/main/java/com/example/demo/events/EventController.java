@@ -2,6 +2,7 @@ package com.example.demo.events;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import javax.validation.Valid;
 
 @RestController
@@ -44,6 +46,25 @@ public class EventController {
 
         return new ResponseEntity<Event>(event, HttpStatus.CREATED);
     }
+
+    @PostMapping("link")
+    public ResponseEntity linkinfoCreate(@RequestBody @Valid EventDto eventDto, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(errors);
+        }
+
+        eventDtoValidator.validate(eventDto, errors);
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(errors);
+        }
+        Event event = modelMapper.map(eventDto, Event.class);
+        event.update();
+        EventResource eventResource = new EventResource(event);
+        eventResource.add(linkTo(EventController.class).slash("link").withRel("self"));
+        eventResource.add(new Link("/docs/index.html#resources-events-create", "profile"));
+        return new ResponseEntity<EventResource>(eventResource, HttpStatus.CREATED);
+    }
+
 
 
 }
