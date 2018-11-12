@@ -1,7 +1,7 @@
 package com.example.demo.events;
 import org.junit.Test;
 
-//import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class EventTest {
@@ -11,7 +11,7 @@ public class EventTest {
         String name = "java bean constructor test";
         Event event = new Event();
         event.setName(name);
-        //assertThat(event.getName()).isEqualTo(name);
+        assertThat(event.getName()).isEqualTo(name);
     }
 
     @Test
@@ -22,7 +22,7 @@ public class EventTest {
                 .description("builder event test")
                 .build();
 
-        //assertThat(event.getName()).isEqualTo(name);
+        assertThat(event.getName()).isEqualTo(name);
     }
 
 

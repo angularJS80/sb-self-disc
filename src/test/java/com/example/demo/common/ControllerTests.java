@@ -15,8 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-//@AutoConfigureRestDocs
-//@Import(TestDocConfig.class)
+@AutoConfigureRestDocs
+@Import(TestDocConfig.class)
 //@ActiveProfiles("test")
 @Ignore
 public class ControllerTests {

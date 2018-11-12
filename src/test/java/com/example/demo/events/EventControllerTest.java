@@ -9,6 +9,11 @@ import java.time.LocalDateTime;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 public class EventControllerTest  extends ControllerTests {
     @Test
     public void createBagicEvent() throws Exception {
@@ -26,6 +31,7 @@ public class EventControllerTest  extends ControllerTests {
                 )
                 .andDo(print())
                 .andExpect(status().isCreated())
+
         ;
 
     }
@@ -85,6 +91,15 @@ public class EventControllerTest  extends ControllerTests {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
                 .andExpect(jsonPath("free").value(true))
+                .andDo(document("create-event",
+                        links(
+                                linkWithRel("self").description("link to self"),
+                                linkWithRel("profile").description("link to profile")
+                                //linkWithRel("events").description("link to events"),
+                                //linkWithRel("update").description("link to update"),
+
+                        )
+                ))
         //.andExpect(jsonPath("id").exists())
         ;
 
