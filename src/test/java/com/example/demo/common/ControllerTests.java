@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @Import(TestDocConfig.class)
-//@ActiveProfiles("test")
+@ActiveProfiles("test")
 @Ignore
 public class ControllerTests {
     @Autowired

@@ -33,11 +33,31 @@
    3) 컨트롤러 호출시 반환값으로 스피넷 작성
    4) asscii 관련 메이븐 라이브러리 추가 및 빌드시 자동 아웃풋 설정
    5) main/asciidoc 문서 템플릿 페이지 작성
+   
+6. 스프링 시큐리티 적용
+   0) 스프링 시큐리티 라이브러리 추가(pom.xml)
+      - org.springframework.security
+      - org.springframework.security.oauth.boot
+   1) Account,AccountRoles 클레스 작성
+   2) AccountRepository 데이터 접근클래스 작성
+   3) AccountAdapter 권한 주고받는 어뎁터 설정
+   4) 계정 생성 및 계정로그인 용 서비스 생성
+   5) SecurityConfig 작성 ( 위에 작성된 권한에 필요한 로그인처리를 권한관리자에 
+      적용한 웹시큐리티 어뎁터  
+      인증에 사용될 로그인 서비스 설정 및 미인증처리 필터링
+   6) AuthServerConfig 작성 ( 시큐리티 컨피그의 권한관리자를 이용해서 권한 설정 어뎁터 작성
+      인증기간등의 설정
+   7) ResourceServerConfig 작성 
+      - 리소스 접근에 대한 필터링 
+      ? 이벤트 리소스 관련 여부 확인
+   8)test application.properties 작성
+      - H2 Database 접근용 
+   9)OAuthTokenTest ,ControllerTests 클래스 작성 
+      - 기능 테스트 
+     
+       
+      
 Next--------------------------------------------------------------------------------------
-6. 유효성 검사 문제 에 대한 표기 
-
-7. 시큐리티 적용
+7. 유효성 검사 문제 에 대한 표기 
 
 8. 인증 전 후에 따른 참조 링크 처리 
-
-9. 테스트 코드에 프로퍼티 적용법
