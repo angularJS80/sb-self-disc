@@ -4,6 +4,7 @@ import com.example.demo.common.ControllerTests;
 import com.example.demo.config.AppProperties;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -20,6 +21,9 @@ public class OAuthTokenTest extends ControllerTests {
     @Autowired
     AppProperties myAppProperties;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
     @Test
     public void getAccessToken() throws Exception {
         String username = "user@email.com";
@@ -33,6 +37,8 @@ public class OAuthTokenTest extends ControllerTests {
 
         this.accountService.createAccount(account);
 
+
+
         this.mockMvc.perform(post("/oauth/token")
                 .with(httpBasic(myAppProperties.getClientId(), myAppProperties.getClientSecret()))
                 .accept(MediaType.APPLICATION_JSON_UTF8)
@@ -45,6 +51,6 @@ public class OAuthTokenTest extends ControllerTests {
         ;
 
 
-
     }
+
 }
