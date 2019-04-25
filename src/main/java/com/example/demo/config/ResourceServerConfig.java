@@ -23,13 +23,15 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
         http
                 .anonymous()
                 .and()
-                .authorizeRequests()
-                //.antMatchers(HttpMethod.GET, "/**/**").permitAll()
-                .antMatchers("/product").authenticated()
-                //.anyRequest().permitAll()
+                    .authorizeRequests()
+                    //.antMatchers(HttpMethod.GET, "/**/**").permitAll()
+                    .antMatchers("/product").authenticated()
+                    //.antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll()
                 .and()
-                .exceptionHandling()
-                .accessDeniedHandler(new OAuth2AccessDeniedHandler())
+                    .csrf()
+                    .disable()
+                    .exceptionHandling()
+                    .accessDeniedHandler(new OAuth2AccessDeniedHandler())
         ;
     }
 }

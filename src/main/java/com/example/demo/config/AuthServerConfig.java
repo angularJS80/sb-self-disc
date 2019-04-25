@@ -3,6 +3,7 @@ package com.example.demo.config;
 import com.example.demo.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -42,6 +43,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         clients.inMemory()
                 .withClient(myAppProperties.getClientId())
                 .secret(passwordEncoder.encode(myAppProperties.getClientSecret()))
+                //.autoApprove(true)
                 .scopes("write", "read")
                 .authorizedGrantTypes("password", "refresh_token")
                 .accessTokenValiditySeconds(10 * 60)
@@ -52,6 +54,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(tokenStore)
                 .authenticationManager(authenticationManager)
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
                 .userDetailsService(accountService);
     }
 }
